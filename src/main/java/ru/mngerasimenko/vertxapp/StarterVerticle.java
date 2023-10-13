@@ -16,7 +16,7 @@ public class StarterVerticle extends AbstractVerticle {
 		ConfigStoreOptions fileStore = new ConfigStoreOptions()
 				.setType("file")
 				.setOptional(true)
-				.setConfig(new JsonObject().put("path", "config.json"));
+				.setConfig(new JsonObject().put("path", "config1.json"));
 		ConfigStoreOptions sysPropsStore = new ConfigStoreOptions().setType("sys");
 		ConfigRetrieverOptions options = new ConfigRetrieverOptions().addStore(fileStore).addStore(sysPropsStore);
 		ConfigRetriever configRetriever = ConfigRetriever.create(vertx, options);
@@ -27,12 +27,13 @@ public class StarterVerticle extends AbstractVerticle {
 				deploy(HttpServerVerticle.class, new DeploymentOptions().setConfig(config.getJsonObject("http")));
 				deploy(DownloadFileVerticle.class, new DeploymentOptions());
 				deploy(SaveFileVerticle.class, new DeploymentOptions().setConfig(config.getJsonObject("file")));
-				logger.info("Module(s) and/or verticle(s) deployment...DONE");
-				startPromise.complete();
 			} else {
-				logger.error("Unable to find configuration file");
-				throw new RuntimeException("Unable to find configuration file");
+				deploy(HttpServerVerticle.class, new DeploymentOptions());
+				deploy(DownloadFileVerticle.class, new DeploymentOptions());
+				deploy(SaveFileVerticle.class, new DeploymentOptions());
 			}
+			logger.info("Module(s) and/or verticle(s) deployment...DONE");
+			startPromise.complete();
 		});
 	}
 
