@@ -16,7 +16,7 @@ public class StarterVerticle extends AbstractVerticle {
 		ConfigStoreOptions fileStore = new ConfigStoreOptions()
 				.setType("file")
 				.setOptional(true)
-				.setConfig(new JsonObject().put("path", "config1.json"));
+				.setConfig(new JsonObject().put("path", "config.json"));
 		ConfigStoreOptions sysPropsStore = new ConfigStoreOptions().setType("sys");
 		ConfigRetrieverOptions options = new ConfigRetrieverOptions().addStore(fileStore).addStore(sysPropsStore);
 		ConfigRetriever configRetriever = ConfigRetriever.create(vertx, options);
