@@ -1,32 +1,43 @@
-= Starter
+Vert.x Maven Starter
+A minimally functional server application with a REST API using the VertX framework.
+The application uses three verticals: http server, file downloader and file saver
 
-image:https://img.shields.io/badge/vert.x-4.4.6-purple.svg[link="https://vertx.io"]
+Prerequisites
 
-This application was generated using http://start.vertx.io
+Apache Maven
 
-== Building
+JDK 8+
 
-To launch your tests:
-```
-./mvnw clean test
-```
+Getting started
+Create your project with:
 
-To package your application:
-```
-./mvnw clean package
-```
+git clone https://github.com/mngerasimenko/wertxapp.git <PROJECT_NAME>
+Replace PROJECT_NAME with the name of your project.
 
-To run your application:
-```
-./mvnw clean compile exec:java
-```
+Once you have retrieved the project, you can check that everything works with:
 
-== Help
+mvp clean package
+mvn exec:java
+The command compiles the project and runs the tests,
+then it launches the application, so you can check by yourself.
 
-* https://vertx.io/docs/[Vert.x Documentation]
-* https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15[Vert.x Stack Overflow]
-* https://groups.google.com/forum/?fromgroups#!forum/vertx[Vert.x User Group]
-* https://discord.gg/6ry7aqPWXy[Vert.x Discord]
-* https://gitter.im/eclipse-vertx/vertx-users[Vert.x Gitter]
+Open your browser to http://localhost:8080/status.
+You should see in response json: {"status": "running"}
 
+Building the project
+To build the project, just use:
 
+mvn clean package
+It generates a fat-jar in the target directory.
+
+run this file: java -jar starter-1.0.0-SNAPSHOT-fat.jar
+
+Then we may send POST request with body json to http://localhost:8080/
+for example: {"url": "https://cbr.ru/vfs/mcirabis/BIK/okv.zip"}
+
+The file must be downloaded from the server and saved to the local folder(by default "downloadedFiles\")
+
+We may change the port and download folder use config file.
+Sample file configuration :
+{"http": {"port": 8080},"file": {"download.path": "downloads\\"}}
+The config file should be named "config.json" and located in classpath.
