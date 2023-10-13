@@ -1,5 +1,6 @@
 Vert.x Maven Starter
 A minimally functional server application with a REST API using the VertX framework.
+
 The application uses three verticals: http server, file downloader and file saver
 
 Prerequisites
@@ -17,27 +18,36 @@ Replace PROJECT_NAME with the name of your project.
 Once you have retrieved the project, you can check that everything works with:
 
 mvp clean package
+
 mvn exec:java
+
+
 The command compiles the project and runs the tests,
 then it launches the application, so you can check by yourself.
 
 Open your browser to http://localhost:8080/status.
+
 You should see in response json: {"status": "running"}
 
 Building the project
+
 To build the project, just use:
 
 mvn clean package
+
 It generates a fat-jar in the target directory.
 
 run this file: java -jar starter-1.0.0-SNAPSHOT-fat.jar
 
 Then we may send POST request with body json to http://localhost:8080/
+
 for example: {"url": "https://cbr.ru/vfs/mcirabis/BIK/okv.zip"}
 
 The file must be downloaded from the server and saved to the local folder(by default "downloadedFiles\")
 
 We may change the port and download folder use config file.
+
 Sample file configuration :
 {"http": {"port": 8080},"file": {"download.path": "downloads\\"}}
+
 The config file should be named "config.json" and located in classpath.
